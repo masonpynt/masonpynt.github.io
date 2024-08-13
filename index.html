@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Calculator</title>
+</head>
+<body>
+  <div class="center">
+  <h1>Calculator</h1>
+  <p>Enter two numbers and select an operation to calculate</p>
+  <table>
+  <form id="form">
+  <table>
+    <tr>
+      <td><label for="fnumber">First Number:</label></td>
+      <td><label for="operation">Operation:</label></td>
+      <td><label for="snumber">Second Number:</label></td>
+    </tr>
+      <tr>
+        <td><input type="text" id="fnumber" name="fnumber" required></td>
+          <td><select id="operation" name="operation">
+            <option value="plus">+</option>
+            <option value="minus">-</option>
+            <option value="times">*</option>
+            <option value="divide">/</option></td>
+            </select>
+            <td><input type="text" id="snumber" name="snumber" required></td>
+            <td><input type="submit" id="submit" Value="Calculate"></td>
+        </tr>
+    </table>
+    </form>
+    <div id="imageCont" class="hidden">
+      <img src="./images/image.png" alt="image">
+      <div class="overlay"></div>
+      <img id="loading" src="./images/loading-green-loading.gif" alt="Calculating...">
+    </div>
+  </div>
+</body>
+<style>
+    body {
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+    p {
+      margin: 0 0 20px 0;
+      text-align: center;
+    }
+    .center {
+      width: 100%;
+      max-width: 736px;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      padding: 5px 15px;
+      text-align: center;
+    }
+    #imageCont {
+      width: 736px;
+      height: 750px;
+      overflow: hidden;
+      padding-top: 50px;
+      position: relative;
+      object-fit: cover;
+    }
+    .hidden {
+      display: none;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      transition: transform 2.5s ease-in-out;
+    }
+    #loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      display: none;
+    }
+ </style>
+  <script>
+    const imageContainer = document.getElementById('imageCont');
+    const form = document.getElementById('form');
+    const overlay = document.querySelector('.overlay');
+    const loadingGif = document.getElementById('loading');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      imageContainer.classList.remove('hidden');
+      loadingGif.style.display = 'block';
+
+
+      setTimeout(() => {
+        loadingGif.style.display = 'none';
+        overlay.style.transition = 'none';
+        overlay.style.transform = 'translateY(0)';
+
+        overlay.offsetHeight;
+
+        overlay.style.transition = 'transform 2.5s ease-in-out';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            slowLoadImage();
+          });
+        });
+      }, 2200);
+      });
+
+    function slowLoadImage() {
+      overlay.style.transform = 'translateY(100%)';
+    }
+
+</script>
+</html>
